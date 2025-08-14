@@ -6,18 +6,18 @@ test("Name should be a string", () => {
 });
 
 test("Name should be longer than 2 characters", () => {
-    expect(() => new Character("E", "Bowerman", 10, 16)).toThrow(Error);
+    expect(() => new Character("E", "Bowerman")).toThrow(Error);
 });
 
 test("Name should be shorter than 10 characters", () => {
-    expect(() => new Character("Hippopotamus", "Bowerman", 10, 16)).toThrow(
+    expect(() => new Character("Hippopotamus", "Bowerman")).toThrow(
         Error
     );
 });
 
 test(
     "Type should be one of the following: 'Bowerman', 'Swordsman', 'Magician', 'Daemon', 'Undead', 'Zombie'", () => { 
-        expect(() => new Character("Kitty", "Cat", 100, 100)).toThrow(
+        expect(() => new Character("Kitty", "Cat")).toThrow(
             Error
         );
     }

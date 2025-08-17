@@ -1,19 +1,64 @@
 import Magician from "../Magician";
 
-let magician;
+test("Testing if the object was created correctly", () => {
+    const magician = new Magician("John");
+    const resultObj = {
+        attack: 10,
+        defence: 40,
+        health: 100,
+        level: 1,
+        name: "John",
+        type: "Magician",
+    };
 
-beforeEach(() => {
-    magician = new Magician("Stefan");
+    expect(magician).toEqual(resultObj);
 });
 
-test("Type should be 'Magician'", () => {
-    expect(magician.type).toEqual("Magician");
+describe("testing levelUp function", () => {
+    let magician;
+
+    beforeEach(() => {
+        magician = new Magician("Harry");
+        magician.levelUp();
+    });
+
+    test("levelUp func should increase level by 1 ", () => {
+        expect(magician.level).toBe(2);
+    });
+
+    test("levelUp func should increase attack by 20%", () => {
+        expect(magician.attack).toBe(12);
+    });
+
+    test("levelUp func should increase defence by 20%", () => {
+        expect(magician.defence).toBe(48);
+    });
+
+    test("levelUp func should make health to be equal to 100", () => {
+        expect(magician.health).toBe(100);
+    });
+
+    test("levelUp func should throw an error if health is equal to 0", () => {
+        magician.health = 0;
+        expect(() => magician.levelUp()).toThrow(Error);
+    });
 });
 
-test("Attack should be 10 by default", () => {
-    expect(magician.attack).toBe(10);
-});
+describe("testing damage function", () => {
+    let magician;
 
-test("Defence should be 40 by default", () => {
-    expect(magician.defence).toBe(40);
+    beforeEach(() => {
+        magician = new Magician("Patric");
+    });
+
+    test("Should calculate health correctly", () => {
+        magician.damage(10);
+        expect(magician.health).toBeCloseTo(94);
+    });
+
+    test("Should change health to 0 if health is < 0", () => {
+        magician.health = -1;
+        magician.damage(1);
+        expect(magician.health).toBe(0);
+    });
 });
